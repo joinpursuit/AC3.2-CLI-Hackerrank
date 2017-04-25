@@ -82,6 +82,43 @@ func hourglass() {
 }
 funk["hourglass"] = hourglass
 
+func maximumElement() {
+    let n = Int(readLine()!)!
+    var max = Int.min
+    // read array and map the elements to integer
+    var stack: [Int] = []
+    
+    for _ in 0..<n {
+        //print(stack)
+        if let input = readLine() {
+            let arr = input.components(separatedBy: " ").map {
+                Int($0)!
+            }
+            
+            if arr[0] == 1 {
+                if arr[1] > max {
+                    max = arr[1]
+                }
+                stack.append(arr[1])
+            }
+            
+            if arr[0] == 2 && !arr.isEmpty {
+                if stack.last! == max {
+                    let _ = stack.popLast()!
+                    max = stack.max()!
+                } else {
+                    let _ = stack.popLast()!
+                }
+            }
+            
+            if arr[0] == 3 {
+                print(max)
+            }
+        }
+    }
+}
+funk["maximumElement"] = maximumElement
+
 while true {
     print("Enter a function, choices are: ", terminator: "")
     for k in funk.keys {
