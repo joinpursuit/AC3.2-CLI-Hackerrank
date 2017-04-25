@@ -120,17 +120,18 @@ func maximumElement() {
 funk["maximumElement"] = maximumElement
 
 while true {
-    print("Enter a function, choices are: ", terminator: "")
+    print("Enter a function name. Your choices are: ", terminator: "")
     for k in funk.keys {
-        print(k, terminator: " ")
+        print(k, terminator: "\n")
     }
-    print()
+    print("or exit...which will stop this prompt from running.")
+    print("\nYour choice: ")
     if let functionName = readLine() {
         if let function = funk[functionName] {
             print("Enter inputs")
             function()
         }
-        if functionName == "exit" {
+        if functionName.lowercased() == "exit" {
             break
         }
     }
