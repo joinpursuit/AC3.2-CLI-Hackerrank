@@ -125,11 +125,14 @@ while true {
         print(k, terminator: " ")
     }
     print()
-    
-    if let functionName = readLine(),
-        let function = funk[functionName] {
-        print("Enter inputs")
-        function()
+    if let functionName = readLine() {
+        if let function = funk[functionName] {
+            print("Enter inputs")
+            function()
+        }
+        if functionName == "exit" {
+            break
+        }
     }
     else {
         print("That's not a valid function")
