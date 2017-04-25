@@ -82,6 +82,16 @@ func hourglass() {
 }
 funk["hourglass"] = hourglass
 
+
+
+
+
+
+
+
+
+
+
 while true {
     print("Enter a function, choices are: ", terminator: "")
     for k in funk.keys {
