@@ -82,6 +82,7 @@ func hourglass() {
 }
 funk["hourglass"] = hourglass
 
+
 func maximumElement() {
     let n = Int(readLine()!)!
     var max = Int.min
@@ -119,7 +120,77 @@ func maximumElement() {
 }
 funk["maximumElement"] = maximumElement
 
-// MARK: - Loop logic below
+
+func queueUsingTwoStacks() {
+    
+    class Node {
+        let val: Int
+        var next: Node?
+        init(val: Int, next: Node?) {
+            self.val = val
+            self.next = next
+        }
+    }
+    
+    class Stack {
+        var stack: Node?
+        func peek() -> Int? {
+            return stack?.val
+        }
+        func pop() -> Int? {
+            let popped = stack
+            stack = stack?.next
+            return popped?.val
+        }
+        func push(_ element: Int) {
+            stack = Node(val: element, next: stack)
+        }
+        var isEmpty: Bool {
+            return stack != nil ? false : true
+        }
+    }
+    
+    let n = Int(readLine()!)!
+    
+    let forwardStack = Stack()
+    let backwardStack = Stack()
+    
+    for _ in 0..<n {
+        let inputArr = readLine()!.components(separatedBy: " ").map{ Int($0)! }
+        let operation = inputArr[0]
+        switch operation {
+        case 1: //enqueue
+            let element = inputArr[1]
+            if backwardStack.isEmpty {
+                while !forwardStack.isEmpty {
+                    backwardStack.push(forwardStack.pop()!)
+                }
+            }
+            backwardStack.push(element)
+        case 2: //dequeue
+            if forwardStack.isEmpty {
+                while !backwardStack.isEmpty {
+                    forwardStack.push(backwardStack.pop()!)
+                }
+            }
+            _ = forwardStack.pop()
+        case 3: //peek
+            if forwardStack.isEmpty {
+                while !backwardStack.isEmpty {
+                    forwardStack.push(backwardStack.pop()!)
+                }
+            }
+            print(forwardStack.peek()!)
+        default:
+            break
+        }
+    }
+}
+
+funk["queueUsingTwoStacks"] = queueUsingTwoStacks
+
+
+
 
 var running = true
 
